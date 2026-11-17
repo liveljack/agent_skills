@@ -1,0 +1,51 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.npm/
+.yarn/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local state / secrets produced by paid skills
+.xianzong-travel-aipay/
+*.pem
+*.key
+.env
+.env.*
+!.env.example
+
+# Build output / temp
+dist/
+build/
+tmp/
+*.log
+*.tmp
+
+# OS-level archives
+*.zip
+*.tar.gz
