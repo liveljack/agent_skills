@@ -6,7 +6,7 @@ A collection of domain-specific skills designed for AI agents. Each skill distil
 
 ## Included Skills
 
-This repository currently ships **4** core skills.
+This repository currently ships **5** core skills.
 
 ### 1. [Domestic Marketing Compliance](domestic-marketing-compliance/SKILL.md)
 
@@ -52,6 +52,24 @@ This repository currently ships **4** core skills.
 *   **Runtime requirements**: Node.js >= 18 and the official `alipay-bot` (`@alipay/agent-payment`); no Python or pip packages needed.
 *   **Good for**: family trips with kids, travelling with elderly parents, team building, outbound travel, honeymoons, study travel, wellness trips, weekend getaways — any trip that needs execution-level detail rather than a list of attractions.
 
+### 5. [Xianzong Linglingji Free](xianzong-linglingji-free/SKILL.md)
+
+*   **What it is**: a **free, offline, no-sign-up, no-payment** chat edition of Linglingji (仙踪问道 · 灵灵机) — it takes the **3** most-asked scenarios out of the full version's 24 and turns them into a self-contained free skill: **marriage timing / dream interpretation / tarot**.
+*   **Core contents**:
+    *   **Rules before prose**: every conclusion is backed by something that was actually computed — the simplified four pillars (day pillar from the 1949-10-01 JiaZi anchor, Five-Rat hour pillar, approximate Start-of-Spring year pillar), spouse star and peach-blossom position, a 25-entry dream-imagery table, and a deterministic 78-card tarot draw.
+    *   **Fixed answer shape**: conclusion → basis → suggestion → compliance statement, a few hundred words of Markdown, with no fatalistic verdicts and no specific dates.
+    *   **Compliance built in**: explicitly a traditional-culture learning / psychological reference, not a prediction; no medical, psychological, legal or investment judgement; no doom-saying from dream imagery or cards.
+    *   **Honest scope boundary**: the free edition gives you the skeleton only — no chart-strength verdicts, luck cycles, multi-turn memory, image recognition or PDF export; those stay in the full version.
+    *   **One guided upsell per answer**: the closing guidance wording lives in `references/scenes-overview.md` and at the end of each scene file.
+*   **Bundled files**:
+    *   [`references/scene-01-marriage.md`](xianzong-linglingji-free/references/scene-01-marriage.md), [`scene-02-dream.md`](xianzong-linglingji-free/references/scene-02-dream.md), [`scene-03-tarot.md`](xianzong-linglingji-free/references/scene-03-tarot.md): per-scenario rules, lookup tables and closing guidance.
+    *   [`references/scenes-overview.md`](xianzong-linglingji-free/references/scenes-overview.md): the full version's 7 categories · 24 scenarios, plus the free-vs-full comparison table.
+    *   [`scripts/linglingji_free.mjs`](xianzong-linglingji-free/scripts/linglingji_free.mjs): `scenes` / `marriage` / `dream` / `tarot` subcommands, zero third-party dependencies.
+    *   [`tests/run_offline_tests.mjs`](xianzong-linglingji-free/tests/run_offline_tests.mjs): offline self-test of the script outputs and parameter boundaries.
+    *   [`SKILL_cn.md`](xianzong-linglingji-free/SKILL_cn.md): the Chinese edition of the skill instructions.
+*   **Runtime requirements**: Node.js >= 18; no network access and no Python packages needed.
+*   **Good for**: "when will I meet the right person", "what does it mean to dream of a coffin / snake / water / losing teeth", "draw three cards on where this is going" — light, low-commitment traditional-culture readings.
+
 ---
 
 ## Installation
@@ -85,6 +103,13 @@ The travel-consultant skill ships a mock server, so you can validate the full 40
 
 ```bash
 cd xianzong-travel-consultant-aipay
+node tests/run_offline_tests.mjs
+```
+
+The free Linglingji skill needs no payment at all, and its script layer can likewise be verified offline:
+
+```bash
+cd xianzong-linglingji-free
 node tests/run_offline_tests.mjs
 ```
 

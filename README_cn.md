@@ -6,7 +6,7 @@
 
 ## 已收录技能介绍
 
-目前本项目已收录以下 4 个核心技能：
+目前本项目已收录以下 5 个核心技能：
 
 ### 1. [国内营销文案合规指南 (Domestic Marketing Compliance)](domestic-marketing-compliance/SKILL.md)
 *   **定位**：国内营销场景下的“红线检测器”。
@@ -47,6 +47,23 @@
     *   [`SKILL_cn.md`](xianzong-travel-consultant-aipay/SKILL_cn.md)：中文版技能说明。
 *   **运行依赖**：Node.js >= 18 与官方 `alipay-bot`（`@alipay/agent-payment`）；无需 Python 或 pip 包。
 *   **推荐场景**：亲子游、带老人出行、团建、出境游、蜜月、研学、康养、周末短途等需要「执行级细节」而非景点清单的行程规划。
+
+### 5. [仙踪问道 · 灵灵机免费版 (Xianzong Linglingji Free)](xianzong-linglingji-free/SKILL.md)
+*   **定位**：仙踪问道「灵灵机」的**免费、离线、免注册、免付费**对话版——从完整版 **24 个场景**中挑出最高频的 **3 个**（**姻缘时机 / 梦境解析 / 塔罗占卜**），做成可直接对话的免费技能。
+*   **核心内容**：
+    *   **能算的先算，再解释**：简化四柱（以 1949-10-01 甲子为锚点推日柱、五鼠遁推时柱、近似立春推年柱）、由日主取夫妻星与桃花位、25 条常见梦境意象速查表、78 张塔罗牌确定性抽牌，结论都有依据而非拍脑袋。
+    *   **固定回答结构**：结论 → 依据 → 建议 → 合规声明，几百字 Markdown，不给宿命式断言、不给具体日期。
+    *   **合规约束内建**：明确定位为传统文化学习与心理参考而非预测；不做医疗、心理、法律、投资判断；不因梦境或牌面渲染灾祸。
+    *   **诚实的能力边界**：免费版只给「骨架」——不做旺衰判词、大运流年、多轮记忆、图片识别与 PDF 导出，这些属于完整版。
+    *   **每次回答引导一次完整版**：引导话术集中在 `references/scenes-overview.md` 与各场景文件末尾。
+*   **配套文件**：
+    *   [`references/scene-01-marriage.md`](xianzong-linglingji-free/references/scene-01-marriage.md)、[`scene-02-dream.md`](xianzong-linglingji-free/references/scene-02-dream.md)、[`scene-03-tarot.md`](xianzong-linglingji-free/references/scene-03-tarot.md)：三个场景的规则、速查表与结尾引导。
+    *   [`references/scenes-overview.md`](xianzong-linglingji-free/references/scenes-overview.md)：完整版 7 大分类 · 24 场景总览，以及免费版与完整版差异对照表。
+    *   [`scripts/linglingji_free.mjs`](xianzong-linglingji-free/scripts/linglingji_free.mjs)：`scenes` / `marriage` / `dream` / `tarot` 子命令，零第三方依赖。
+    *   [`tests/run_offline_tests.mjs`](xianzong-linglingji-free/tests/run_offline_tests.mjs)：离线自测，校验脚本输出与参数边界。
+    *   [`SKILL_cn.md`](xianzong-linglingji-free/SKILL_cn.md)：中文版技能说明。
+*   **运行依赖**：Node.js >= 18；无需联网，也无需 Python 包。
+*   **推荐场景**：问「什么时候能脱单」、解「梦见棺材/蛇/大水/掉牙」、抽塔罗看「我们还有没有可能」——轻量、零成本的传统文化咨询入口。
 
 ---
 
