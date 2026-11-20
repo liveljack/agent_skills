@@ -6,7 +6,7 @@ A collection of domain-specific skills designed for AI agents. Each skill distil
 
 ## Included Skills
 
-This repository currently ships **5** core skills.
+This repository currently ships **6** core skills.
 
 ### 1. [Domestic Marketing Compliance](domestic-marketing-compliance/SKILL.md)
 
@@ -37,22 +37,39 @@ This repository currently ships **5** core skills.
 
 ### 4. [Xianzong Travel Consultant AIPay](xianzong-travel-consultant-aipay/SKILL.md)
 
-*   **What it is**: one line of requirements becomes an execution-ready custom itinerary with typeset PDF delivery — a **paid, pay-per-use** skill.
+*   **What it is**: turns a line of requirements into an execution-ready itinerary with typeset PDF delivery — a **paid, pay-per-use** skill, now with current-information verification and multilingual output.
 *   **Core contents**:
-    *   **7 mandatory delivery sections**: trip overview, day-by-day schedule (down to morning/afternoon/evening and departure times), intercity and local transport, lodging-area advice, food recommendations, itemized budget, and important cautions — at least 800 characters of body text.
-    *   **Execution-level detail**: ticketing and reservations written as hard constraints (closure days, ticket-release windows, no on-site sales, child height limits), plus concrete fallbacks for rain, sold-out tickets, closures, fatigue and delays, with stamina guards (mandatory rest windows, continuous-walking caps, early-exit conditions).
-    *   **Typeset PDF + email delivery**: cover page, table of contents, branded footer, an ~90-day download link, and the PDF emailed to the address the user provides.
-    *   **Personalization and language**: `country_code` (domestic / overseas) combined freely with 3 traveller types, 11 themes and 9 content focuses; `language` controls the answer body (PDF cover labels and the delivery email are currently Chinese only).
-    *   **Alipay AI pay-per-use (HTTP 402)**: CNY 0.99 per call (approx USD 0.15), no subscription and no auto-renewal; all payment actions are delegated to the official `alipay-payment-skill` / `alipay-bot`, and this skill never implements payment or signing.
+    *   **7 mandatory delivery sections**: trip overview, day-by-day schedule (down to morning/afternoon/evening and departure times), intercity and local transport, lodging-area advice, food recommendations, itemized budget, and important cautions.
+    *   **Execution-level detail**: ticketing and reservations, advance-booking deadlines, age/height constraints, rest windows, walking limits, and concrete fallbacks for rain, sold-out tickets, closures, fatigue and delays.
+    *   **Fact verification**: prices, opening hours and operating rules are marked as verified with source/date or left explicitly as needing verification.
+    *   **Typeset PDF + email delivery**: cover page, table of contents, branded footer, an ~90-day download link, and delivery to the provided email address.
+    *   **Personalization and language**: `country_code`, traveller scenarios, 11 themes and 9 content focuses; Chinese, English, Japanese, Korean and French delivery via `language`, with English fallback.
+    *   **Alipay AI pay-per-use (HTTP 402)**: CNY 0.99 per call (approximately USD 0.15), no subscription and no auto-renewal; payment is delegated to the official `alipay-payment-skill` / `alipay-bot`, with no payment or signing implementation in this skill.
 *   **Bundled files**:
-    *   [`references/402-travel-flow.md`](xianzong-travel-consultant-aipay/references/402-travel-flow.md): the full 402 flow (obtain bill → pay → retrieve the resource with the payment proof).
+    *   [`references/402-travel-flow.md`](xianzong-travel-consultant-aipay/references/402-travel-flow.md): the updated full 402 flow (obtain bill → pay → retrieve the resource with the payment proof).
     *   [`scripts/travel_aipay.mjs`](xianzong-travel-consultant-aipay/scripts/travel_aipay.mjs): `body` / `probe` / `pay` / `complete` / `render` subcommands, zero third-party dependencies.
-    *   [`tests/`](xianzong-travel-consultant-aipay/tests): offline tests (`mock_server.mjs` + `run_offline_tests.mjs`) that exercise the whole flow without network access or real payment.
-    *   [`SKILL_cn.md`](xianzong-travel-consultant-aipay/SKILL_cn.md): the Chinese edition of the skill instructions.
+    *   [`tests/`](xianzong-travel-consultant-aipay/tests): mock-server and offline tests for the complete flow without network access or real payment.
+    *   [`SKILL_cn.md`](xianzong-travel-consultant-aipay/SKILL_cn.md) and [`SKILL_en.md`](xianzong-travel-consultant-aipay/SKILL_en.md): Chinese and English editions.
 *   **Runtime requirements**: Node.js >= 18 and the official `alipay-bot` (`@alipay/agent-payment`); no Python or pip packages needed.
 *   **Good for**: family trips with kids, travelling with elderly parents, team building, outbound travel, honeymoons, study travel, wellness trips, weekend getaways — any trip that needs execution-level detail rather than a list of attractions.
 
-### 5. [Xianzong Linglingji Free](xianzong-linglingji-free/SKILL.md)
+### 5. [Mystery Game · Office Murder Case](game-office-murder-case/SKILL.md)
+
+*   **What it is**: an immersive single-player, locally run murder-mystery adventure. The player is the detective; AI characters are fictional suspects and one AI acts as the Dungeon Master.
+*   **Core contents**:
+    *   **Natural-language investigation**: freely question characters, search scenes, investigate the body or objects, confront pairs and vote.
+    *   **Character-isolated knowledge**: each AI character reads only its own Markdown script, preventing accidental disclosure of other suspects' secrets.
+    *   **Complete game flow**: phase advancement, round management, AI-to-AI questioning, vote counting and final truth reveal are handled by the engine.
+    *   **Local and offline-first**: works with local Ollama or OpenAI-compatible APIs, and includes a `--mock` mode that requires no API key.
+    *   **Script-data separation**: one Markdown file per character and directory-based scenarios make new murder-mystery cases independent of the game engine.
+*   **Bundled files**:
+    *   [`references/004-office-murder/`](game-office-murder-case/references/004-office-murder/) and [`scripts/game.py`](game-office-murder-case/scripts/game.py): the example scenario, character scripts, clue files and local game runner.
+    *   [`tests/run_offline.py`](game-office-murder-case/tests/run_offline.py) and [`tests/replay_full_game.py`](game-office-murder-case/tests/replay_full_game.py): offline flow and replay tests.
+    *   [`SKILL_cn.md`](game-office-murder-case/SKILL_cn.md): the Chinese edition of the skill instructions.
+*   **Runtime requirements**: Python >= 3.10. It is fictional entertainment and does not provide real-world criminal guidance.
+*   **Good for**: solo deduction games, AI-hosted mystery sessions, clue investigation, character questioning and scripted-roleplay practice.
+
+### 6. [Xianzong Linglingji Free](xianzong-linglingji-free/SKILL.md)
 
 *   **What it is**: a **free, offline, no-sign-up, no-payment** chat edition of Linglingji (仙踪问道 · 灵灵机) — it takes the **3** most-asked scenarios out of the full version's 24 and turns them into a self-contained free skill: **marriage timing / dream interpretation / tarot**.
 *   **Core contents**:

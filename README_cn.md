@@ -6,7 +6,7 @@
 
 ## 已收录技能介绍
 
-目前本项目已收录以下 5 个核心技能：
+目前本项目已收录以下 6 个核心技能：
 
 ### 1. [国内营销文案合规指南 (Domestic Marketing Compliance)](domestic-marketing-compliance/SKILL.md)
 *   **定位**：国内营销场景下的“红线检测器”。
@@ -33,22 +33,38 @@
 *   **推荐场景**：自媒体起号、营销软文、引流文案、个人 IP 打造。
 
 ### 4. [仙踪问道 · 旅行咨询 (Xianzong Travel Consultant AIPay)](xianzong-travel-consultant-aipay/SKILL.md)
-*   **定位**：一句话需求 → 可直接出发的定制行程方案（含排版 PDF 交付），属于「付费可调用」的技能。
+*   **定位**：一句话需求 → 可直接出发的定制行程方案（含排版 PDF 交付），属于「付费可调用」的技能；现已增加时效核实与多语言交付能力。
 *   **核心内容**：
-    *   **7 大章节强制交付标准**：行程总览、逐日行程（细化到上午/下午/晚间与出发时刻）、城际与市内交通、住宿区域建议、美食推荐、分项预算表、注意事项，正文不少于 800 字。
-    *   **执行层细节**：票务与预约写成硬约束（闭馆日、放票时间、无现场售票、儿童身高门槛），并给出雨天/无票/闭馆/疲惫/延误的替代方案与体能兜底（强制休息时段、连续步行上限、提前离园条件）。
+    *   **7 大章节强制交付标准**：行程总览、逐日行程（细化到上午/下午/晚间与出发时刻）、城际与市内交通、住宿区域建议、美食推荐、分项预算表、注意事项。
+    *   **执行层细节**：票务与预约、提前预订期限、儿童年龄与身高约束、强制休息时段、连续步行上限，以及雨天、无票、闭馆、疲惫、延误的具体替代方案。
+    *   **时效核实**：票价、开放时间、运营政策标注「已核实（来源 + 日期）」或「需核实」，不把无法确认的信息写成确定事实。
     *   **排版 PDF + 邮件交付**：带封面、目录、品牌页脚，约 90 天有效下载链接，同时发送到用户填写的邮箱。
-    *   **多语言与个性化**：`country_code`（境内/境外）+ 3 种出行人群 + 11 类主题 + 9 类内容侧重可自由组合；`language` 控制正文语言（PDF 封面与邮件目前为中文）。
-    *   **AI 付（HTTP 402 按量付费）**：0.99 元/次（约 0.15 美元），无订阅、无自动续费；付款动作全部交给官方 `alipay-payment-skill` 的 `alipay-bot`，本 Skill 不实现付款与签名。
+    *   **多语言与个性化**：支持 `country_code`、同行场景、11 类主题、9 类内容侧重；`language` 支持中文、英文、日文、韩文与法文交付，其他语种回退英文。
+    *   **AI 付（HTTP 402 按量付费）**：0.99 元/次（约 0.15 美元），无订阅、无自动续费；付款动作交给官方 `alipay-payment-skill` 的 `alipay-bot`，本 Skill 不实现付款与签名。
 *   **配套文件**：
-    *   [`references/402-travel-flow.md`](xianzong-travel-consultant-aipay/references/402-travel-flow.md)：402 全流程（取账单 → 付款 → 凭支付凭证取资源）。
+    *   [`references/402-travel-flow.md`](xianzong-travel-consultant-aipay/references/402-travel-flow.md)：更新后的 402 完整流程（取账单 → 付款 → 凭支付凭证取资源）。
     *   [`scripts/travel_aipay.mjs`](xianzong-travel-consultant-aipay/scripts/travel_aipay.mjs)：`body` / `probe` / `pay` / `complete` / `render` 子命令，零第三方依赖。
-    *   [`tests/`](xianzong-travel-consultant-aipay/tests)：离线测试（`mock_server.mjs` + `run_offline_tests.mjs`），无需联网与付款即可验证全流程。
-    *   [`SKILL_cn.md`](xianzong-travel-consultant-aipay/SKILL_cn.md)：中文版技能说明。
+    *   [`tests/`](xianzong-travel-consultant-aipay/tests)：Mock 服务与离线测试，无需联网、真实付款即可验证完整流程。
+    *   [`SKILL_cn.md`](xianzong-travel-consultant-aipay/SKILL_cn.md) 与 [`SKILL_en.md`](xianzong-travel-consultant-aipay/SKILL_en.md)：中英文技能说明。
 *   **运行依赖**：Node.js >= 18 与官方 `alipay-bot`（`@alipay/agent-payment`）；无需 Python 或 pip 包。
 *   **推荐场景**：亲子游、带老人出行、团建、出境游、蜜月、研学、康养、周末短途等需要「执行级细节」而非景点清单的行程规划。
 
-### 5. [仙踪问道 · 灵灵机免费版 (Xianzong Linglingji Free)](xianzong-linglingji-free/SKILL.md)
+### 5. [剧本杀游戏·办公室谋杀案 (Mystery Game · Office Murder Case)](game-office-murder-case/SKILL.md)
+*   **定位**：沉浸式单人本地剧本杀。玩家扮演侦探；AI 虚构角色是嫌疑人，另有一个 AI 担任主持人（DM）。
+*   **核心内容**：
+    *   **自然语言调查**：自由询问角色、搜查场景、搜身或深入调查物品、点名角色对质、参与投票。
+    *   **角色知识隔离**：每个 AI 角色只读取自己的 Markdown 剧本，避免误读或泄露其他嫌疑人的秘密。
+    *   **完整游戏流程**：阶段推进、轮次管理、AI 角色之间自主互问、计票与投票后揭晓真相均由引擎处理。
+    *   **本地离线优先**：可接入本地 Ollama 或 OpenAI 兼容接口；内置 `--mock` 模式，无需 API Key。
+    *   **剧本与引擎解耦**：每个角色一个 Markdown，场景按目录组织；增加新剧本无需修改游戏引擎。
+*   **配套文件**：
+    *   [`references/004-office-murder/`](game-office-murder-case/references/004-office-murder/) 与 [`scripts/game.py`](game-office-murder-case/scripts/game.py)：示例剧本、角色文档、线索文件和本地游戏入口。
+    *   [`tests/run_offline.py`](game-office-murder-case/tests/run_offline.py) 与 [`tests/replay_full_game.py`](game-office-murder-case/tests/replay_full_game.py)：离线流程与完整复盘测试。
+    *   [`SKILL_cn.md`](game-office-murder-case/SKILL_cn.md)：中文版技能说明。
+*   **运行依赖**：Python >= 3.10。本作品为虚构悬疑娱乐，不提供真实犯罪指导。
+*   **推荐场景**：单人推理游戏、AI 主持剧本杀、搜证与询问、角色对质、剧本角色扮演练习。
+
+### 6. [仙踪问道 · 灵灵机免费版 (Xianzong Linglingji Free)](xianzong-linglingji-free/SKILL.md)
 *   **定位**：仙踪问道「灵灵机」的**免费、离线、免注册、免付费**对话版——从完整版 **24 个场景**中挑出最高频的 **3 个**（**姻缘时机 / 梦境解析 / 塔罗占卜**），做成可直接对话的免费技能。
 *   **核心内容**：
     *   **能算的先算，再解释**：简化四柱（以 1949-10-01 甲子为锚点推日柱、五鼠遁推时柱、近似立春推年柱）、由日主取夫妻星与桃花位、25 条常见梦境意象速查表、78 张塔罗牌确定性抽牌，结论都有依据而非拍脑袋。
